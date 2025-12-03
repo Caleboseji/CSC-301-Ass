@@ -1,18 +1,22 @@
 # Node class
 class Node:
-    def _init_(self, data):
+    def __init__(self, data):
         self.data = data
         self.next = None
 
+
+# LinkedList class
 class LinkedList:
-    def _init_(self):
+    def __init__(self):
         self.head = None
 
-    def insert_at_beginning(self, data):  
+    # Insert at the beginning
+    def insert_at_beginning(self, data):
         new_node = Node(data)
         new_node.next = self.head
         self.head = new_node
 
+    # Insert at the end
     def insert_at_end(self, data):
         new_node = Node(data)
         if self.head is None:
@@ -24,9 +28,11 @@ class LinkedList:
             current = current.next
         current.next = new_node
 
+    # Delete a node by key (value)
     def delete_node(self, key):
         current = self.head
 
+        # If head node is the one to delete
         if current and current.data == key:
             self.head = current.next
             return
@@ -36,32 +42,42 @@ class LinkedList:
             prev = current
             current = current.next
 
+        # If value not found
         if current is None:
-            print("Key not found.")
+            print(f"{key} not found in list.")
             return
 
+        # Unlink the node
         prev.next = current.next
 
+    # Display the list
     def display_list(self):
         current = self.head
         while current:
-            print(current.data, "->", end=" ")
+            print(current.data, end=" -> ")
             current = current.next
         print("None")
 
 
-# Testing
-list = LinkedList()
+# ----------------------------
+# TEST THE LINKED LIST
+# ----------------------------
 
-list.insert_at_end(10)
-list.insert_at_end(20)
-list.insert_at_end(30)
-list.insert_at_end(40)
-list.insert_at_end(50)
+ll = LinkedList()
 
-print("Initial list:")
-list.display_list()
+# Insert at least 5 values
+ll.insert_at_end(10)
+ll.insert_at_end(20)
+ll.insert_at_end(30)
+ll.insert_at_end(40)
+ll.insert_at_end(50)
 
-list.delete_node(30)
+print("Initial Linked List:")
+ll.display_list()
+
+# Delete one value
+ll.delete_node(30)
+
 print("After deleting 30:")
-list.display_list()
+ll.display_list()
+
